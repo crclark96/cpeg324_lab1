@@ -1,0 +1,55 @@
+Collin Reilly Clark
+Zachary Irons
+CPEG 324
+5 March 2018
+
+                                  ISA Specification
+
+Instruction formats:
+            bit 0
+                0 - arithmetic
+                1 - load immediate/display/compare
+                 
+Arithmetic instructions:
+            bit 1
+                0 - subtract
+                1 - add
+            bit 2:3
+                destination register
+            bit 4:5
+                source register 1
+            bit 6:7
+                source register 2
+
+Load/display/compare:
+            bit 1
+                0 - load
+                1 - compare/display
+
+Display/compare:
+            bit 2
+                0 - compare
+                1 - display
+
+Load:
+            bit 2:3
+                destination register
+            bit 4:7
+                4-bit immediate value
+
+Display:
+            bit 3:4
+                source register
+
+Compare:
+            bit 3:4
+                source register 1
+            bit 5:6
+                source register 2
+            bit 7
+                0 - skip one instruction
+                1 - skip two instructions
+
+
+            
+                 
