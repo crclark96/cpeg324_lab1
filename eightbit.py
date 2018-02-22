@@ -18,15 +18,13 @@ def eightbit(i):
 
                 ans += '0'
                 
-                n = int(n/2)
-                
             else:
 
                 i -= n
                 
                 ans += '1'
                 
-                n = int(n/2)
+            n = int(n/2)
 
         ans = '0'*(8- len(ans)) + ans
 
@@ -50,15 +48,13 @@ def eightbit(i):
 
                 ans += '1'
                 
-                n = int(n/2)
-                
             else:
 
                 i -= n
                 
                 ans += '0'
                 
-                n = int(n/2)
+            n = int(n/2)
 
         if ans[-1:] == '0':
 
@@ -66,7 +62,13 @@ def eightbit(i):
 
         else:
 
-            ans = ans[:-1] + '0'
+            x = -1
+
+            while ans[x] == '1' and x < 8:
+
+                x -= 1
+
+            ans = ans[:len(ans) - abs(x)] + '1' + '0'*(abs(x) - 1)
 
         ans = '1'*(8- len(ans)) + ans
 
@@ -79,12 +81,5 @@ def eightbit(i):
         return('0b00000000')
     
 
-print(3,eightbit(3))
-print(45,eightbit(45))
-print(127,eightbit(127))
-print(128,eightbit(128))
-print(-1, eightbit(-1))
-print(-3, eightbit(-3))
-print(-127, eightbit(-127))
-print(-129, eightbit(-129))
-print(0, eightbit(0))
+for a in range(-128,128):
+    print(a, eightbit(a))
