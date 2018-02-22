@@ -7,29 +7,29 @@ CPEG 324- Lab 1
 
 ASI ISA
 """
-reg = [0,0,0,0]
 
-def main():
-    global reg
+import sys
 
-    instruction = input("")
+def operate(registers, instruction):
 
-    bit0 = instruction[:1]
+    offset = 0
+    bit0 = int(instruction[0])
 
-    bit1 = instruction[1:2]
+    bit1 = int(instruction[1])
 
     #Arithmetic Instructions
     if bit0 == 0:
 
         #Subtract
         if bit1 == 0:
-
-            reg[int(instruction[2:4], 2)] = instruction[4:6] - instruction[6:]
+            registers[int(instruction[2:4], 2)] = int(instruction[4:6],2) \
+                                                  - int(instruction[6:],2)
 
         #Addition
         else:
 
-            reg[int(instruction[2:4], 2)] = instruction[4:6] + instruction[6:]
+            registers[int(instruction[2:4], 2)] = int(instruction[4:6],2) \
+                                                  + int(instruction[6:],2)
 
     #Logical/Display/Compare Instructions
     else:
@@ -37,27 +37,47 @@ def main():
         #Load
         if bit1 == 0:
 
-            reg[int(instruction[2:4], 2)] = int(instruction[4:], 2)
+            registers[int(instruction[2:4], 2)] = int(instruction[4:], 2)
             
         #Display/Compare
         else:
 
-            bit2 = instruction[2:3]
+            bit2 = int(instruction[2])
 
             #Compare
             if bit2 == 0:
 
                 if instruction[3:5] == instruction[5:7]:
 
-                    offset = int(instruction[7:],2)
+                    offset = int(instruction[7],2)
 
             #Display
             else:
 
                 print(int(instruction[3:5],2))
     
-
+    return registers,offset
 
 
 if __name__ == "__main__":
-    main()
+    registers = [0]*4
+    instructions = []
+    pc = 0
+    if len(sys.argv) != 2:
+        print('usage: ./asi.py <filename>')
+        sys.exit()
+
+    try:
+        f = open(sys.argv[1],'r')
+    except IOError:
+        print('no such file')
+        sys.exit()
+
+    for instruction in f:
+        instructions.append(instruction.rstrip())
+
+    while pc < len(instructions):
+        registers,offset = operate(registers,instructions[pc])
+        pc += offset + 1
+
+        
