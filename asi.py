@@ -13,6 +13,7 @@ import sys
 def operate(registers, instruction):
 
     offset = 0
+    
     bit0 = int(instruction[0])
 
     bit1 = int(instruction[1])
@@ -22,6 +23,7 @@ def operate(registers, instruction):
 
         #Subtract
         if bit1 == 0:
+            
             registers[int(instruction[2:4], 2)] = int(instruction[4:6],2) \
                                                   - int(instruction[6:],2)
 
@@ -60,24 +62,35 @@ def operate(registers, instruction):
 
 
 if __name__ == "__main__":
+    
     registers = [0]*4
+    
     instructions = []
+    
     pc = 0
+    
     if len(sys.argv) != 2:
+        
         print('usage: ./asi.py <filename>')
         sys.exit()
 
     try:
+        
         f = open(sys.argv[1],'r')
+        
     except IOError:
+        
         print('no such file')
         sys.exit()
 
     for instruction in f:
+        
         instructions.append(instruction.rstrip())
 
     while pc < len(instructions):
+        
         registers,offset = operate(registers,instructions[pc])
+
         pc += offset + 1
 
         
