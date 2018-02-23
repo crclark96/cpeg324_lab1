@@ -49,14 +49,14 @@ def operate(registers, instruction):
             #Compare
             if bit2 == 0:
 
-                if instruction[3:5] == instruction[5:7]:
+                if registers[int(instruction[3:5],2)] == registers[int(instruction[5:7],2)]:
 
                     offset = int(instruction[7],2)
 
             #Display
             else:
 
-                print(int(instruction[3:5],2))
+                print(registers[int(instruction[3:5],2)])
     
     return registers,offset
 
