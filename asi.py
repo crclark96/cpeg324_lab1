@@ -9,6 +9,7 @@ ASI ISA
 """
 
 import sys
+from eightbit import eightbit
 
 def operate(registers, instruction):
 
@@ -56,7 +57,7 @@ def operate(registers, instruction):
             #Display
             else:
 
-                print(int(instruction[3:5],2))
+                print(eightbit(registers[int(instruction[3:5],2)]))
     
     return registers,offset
 
@@ -84,8 +85,8 @@ if __name__ == "__main__":
         sys.exit()
 
     for instruction in f:
-        
-        instructions.append(instruction.rstrip())
+        if '#' not in instruction:
+            instructions.append(instruction.rstrip())
 
     while pc < len(instructions):
         
