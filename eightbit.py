@@ -79,7 +79,7 @@ def eightbit(i):
     else:
         return('0b00000000')
     
-
-for a in range(-128,128):
-    print(a, eightbit(a))
+if __name__ == '__main__':
+    for a in range(-128,128):
+        print(a, eightbit(a))
 

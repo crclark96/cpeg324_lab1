@@ -10,6 +10,7 @@ ASI ISA
 
 import sys
 from eightbit import eightbit
+from dec_convert import dec_convert
 
 def operate(registers, instruction):
 
