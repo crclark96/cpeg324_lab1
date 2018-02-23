@@ -5,51 +5,31 @@ CPEG 324
 
                                   ISA Specification
 
-Instruction formats:
-            bit 0
-                0 - arithmetic
-                1 - load immediate/display/compare
-                 
-Arithmetic instructions:
-            bit 1
-                0 - subtract
-                1 - add
-            bit 2:3
-                destination register
-            bit 4:5
-                source register 1
-            bit 6:7
-                source register 2
+Add:
+        add values stored in two source registers, and store in the
+        destination register
+        format: 01      00     00    00
+                opcode  dest   src1  src2
 
-Load/display/compare:
-            bit 1
-                0 - load
-                1 - compare/display
-
-Display/compare:
-            bit 2
-                0 - compare
-                1 - display
-
-Load:
-            bit 2:3
-                destination register
-            bit 4:7
-                4-bit immediate value
-
+Subtract:
+        subtract values stored in two source registers, and store in the
+        destination register
+        format: 00      00     00    00
+                opcode dest    src1  src2
+                
 Display:
-            bit 3:4
-                source register
-
+        print the value stored in a register to the console
+        format: 111     00     0000
+                opcode  src    empty
 Compare:
-            bit 3:4
-                source register 1
-            bit 5:6
-                source register 2
-            bit 7
-                0 - skip one instruction
-                1 - skip two instructions
+        compare the values in two registers and skip the provided number
+        of instructions if they are the same
+        format: 110     00    00    0
+                opcode  src1  src2  offset (0->1 instruction,
+                                            1->2 instructions)
+                                            
+Load:
+        load a four bit signed, twos complement immediate into a register
+        format: 10      00    0000
+                opcode  dest  immediate
 
-
-            
-                 
