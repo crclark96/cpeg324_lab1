@@ -25,14 +25,14 @@ def operate(registers, instruction):
         #Subtract
         if bit1 == 0:
             
-            registers[int(instruction[2:4], 2)] = int(instruction[4:6],2) \
-                                                  - int(instruction[6:],2)
+            registers[int(instruction[2:4], 2)] = registers[int(instruction[4:6],2)] \
+                                                  - registers[int(instruction[6:],2)]
 
         #Addition
         else:
 
-            registers[int(instruction[2:4], 2)] = int(instruction[4:6],2) \
-                                                  + int(instruction[6:],2)
+            registers[int(instruction[2:4], 2)] = registers[int(instruction[4:6],2)] \
+                                                  + registers[int(instruction[6:],2)]
 
     #Logical/Display/Compare Instructions
     else:
@@ -40,7 +40,7 @@ def operate(registers, instruction):
         #Load
         if bit1 == 0:
 
-            registers[int(instruction[2:4], 2)] = int(instruction[4:], 2)
+            registers[int(instruction[2:4], 2)] = dec_convert(instruction[4:])
             
         #Display/Compare
         else:
@@ -50,7 +50,7 @@ def operate(registers, instruction):
             #Compare
             if bit2 == 0:
 
-                if instruction[3:5] == instruction[5:7]:
+                if registers[int(instruction[3:5],2)] == registers[int(instruction[5:7],2)]:
 
                     offset = int(instruction[7],2)
 
