@@ -1,0 +1,27 @@
+# load registers 1, 1, -1, -1
+10000001
+10010001
+10101111
+10111111
+# compare $0 $1 (1=1) SKIP ONE
+11000010
+# skip one line
+11111000
+# compare $0 $1 (1=1) SKIP TWO
+11000011
+# skip two lines
+11111000
+11111000
+# compare $0 $2 (1!=-1) DOES NOT SKIP ONE
+11000100
+# does not skip one
+11111000
+# compare $0 $2 (1!=-1) DOES NOT SKIP TWO
+11000101
+# does not skip two
+11111000
+11111000
+# compare $2 $3 (-1=-1) SKIP ONE
+11010110
+# skip one line
+11111000
