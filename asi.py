@@ -53,7 +53,7 @@ def operate(registers, instruction):
 
                 if registers[int(instruction[3:5],2)] == registers[int(instruction[5:7],2)]:
 
-                    offset = int(instruction[7],2)
+                    offset = int(instruction[7],2) + 1
 
             #Display
             else:
