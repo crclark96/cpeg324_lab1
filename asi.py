@@ -68,6 +68,7 @@ if __name__ == "__main__":
     registers = [0]*4
     
     instructions = []
+    comments = []
     
     pc = 0
     
@@ -83,12 +84,29 @@ if __name__ == "__main__":
     except IOError:
         
         print('no such file')
-        sys.exit()
+        sys.exit(1)
 
     for instruction in f:
-        if '#' not in instruction:
-            instructions.append(instruction.rstrip())
+        instructions.append(instruction.rstrip())
 
+
+    # check input validity
+    for i in range(len(instructions)):
+        if instructions[i][0] == '#':
+            comments.append(instructions[i])
+            continue
+        if len(instructions[i]) != 8:
+            print("Invalid input format on line {}".format(i+1))
+            sys.exit(1)
+        for char in instructions[i]:
+            if char != '1' and char != '0':
+                print("Invalid input format on line {}".format(i+1))
+                sys.exit(1)
+
+    # parse out comments
+    for comment in comments:
+        instructions.remove(comment)
+                
     while pc < len(instructions):
         
         registers,offset = operate(registers,instructions[pc])
