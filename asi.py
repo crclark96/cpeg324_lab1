@@ -51,7 +51,8 @@ def operate(registers, instruction):
             #Compare
             if bit2 == 0:
 
-                if registers[int(instruction[3:5],2)] == registers[int(instruction[5:7],2)]:
+                if eightbit(registers[int(instruction[3:5],2)]) \
+                   == eightbit(registers[int(instruction[5:7],2)]):
 
                     offset = int(instruction[7],2) + 1
 
