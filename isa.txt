@@ -15,7 +15,7 @@ Subtract:
         subtract values stored in two source registers, and store in the
         destination register
         format: 00      00     00    00
-                opcode dest    src1  src2
+                opcode  dest   src1  src2
                 
 Display:
         print the value stored in a register to the console
